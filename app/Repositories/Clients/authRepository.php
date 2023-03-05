@@ -41,7 +41,7 @@ class authRepository
         $validation = Validator::make($request->all(),[
             'name'=>'required|unique:users,name,'.$request->id,
             'gender'=>'required',
-            'age'=>'required',
+            'age'=>'required|numeric',
             'type'=>'boolean'
         ]);
 

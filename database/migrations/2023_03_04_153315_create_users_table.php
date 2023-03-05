@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Constants\UserTypes;
+use App\Constants\GenderTypes;
 
 return new class extends Migration
 {
@@ -17,7 +18,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('image')->nullable();
             $table->boolean('type')->default(UserTypes::CLIENT);
-            $table->string('gender');
+            $table->enum('gender',[GenderTypes::MALE,GenderTypes::FEMALE]);
             $table->integer('age');
             $table->string('password')->nullable();
             $table->string('access_code')->nullable()->unique();
