@@ -4,6 +4,7 @@ namespace App\Repositories\Clients;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Throwable;
 
@@ -52,9 +53,13 @@ class authRepository
 
             if(!$user->access_code){
                 $user->access_code = setNewRandomCode();
-                $user->save();
             }
 
+            if($user->password){
+                $user->password = Hash::make($request->password);
+            }
+
+            $user->save();
             if($request->id){
                 return response()->json(['status'=>200,'message'=>'ur account has been updated successfully']);
             }
