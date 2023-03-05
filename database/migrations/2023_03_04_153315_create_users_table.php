@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('image')->nullable();
-            $table->string('type')->default(UserTypes::CLIENT);
+            $table->boolean('type')->default(UserTypes::CLIENT);
             $table->string('gender');
             $table->integer('age');
             $table->string('password')->nullable();
