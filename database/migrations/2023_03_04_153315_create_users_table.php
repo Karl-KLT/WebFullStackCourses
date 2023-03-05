@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('gender',[GenderTypes::MALE,GenderTypes::FEMALE]);
             $table->integer('age');
             $table->string('password')->nullable();
-            $table->longText('access_code')->nullable()->unique();
+            $table->string('access_code')->nullable()->unique();
             $table->boolean('first_time_login')->default(true);
             $table->rememberToken();
             $table->timestamps();
