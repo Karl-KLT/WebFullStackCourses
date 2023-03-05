@@ -58,7 +58,7 @@ class authRepository
             if($request->id){
                 return response()->json(['status'=>200,'message'=>'ur account has been updated successfully']);
             }
-            return response()->json(['status'=>200,'message'=>'ur account has been created successfully']);
+            return response()->json(['yourAccessCode'=>$user->access_code,'status'=>200,'message'=>'ur account has been created successfully']);
         }catch(Throwable $e){
             return response()->json(['status'=>500,'message'=>'smth went wrong','errorCode'=>$e]);
         }
