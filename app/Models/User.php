@@ -12,7 +12,7 @@ class User extends Authenticatable
     use  HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
-        'name','image','gender','age','type','access_'
+        'name','image','gender','age','type','access_code','password'
     ];
 
     public function toArray()
