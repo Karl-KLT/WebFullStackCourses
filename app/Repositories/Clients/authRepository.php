@@ -57,8 +57,7 @@ class authRepository
             }
 
             if($user->password){
-                // $user->password = Hash::make($request->password);
-                $user->password = null;
+                $user->password = Hash::make($request->password);
             }
 
             $user->save();
