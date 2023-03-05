@@ -42,6 +42,7 @@ class authRepository
             'name'=>'required|unique:users,name,'.$request->id,
             'gender'=>'required',
             'age'=>'required',
+            'type'=>'boolean'
         ]);
 
         if($validation->fails()){
@@ -60,6 +61,7 @@ class authRepository
             }
 
             $user->save();
+
             if($request->id){
                 return response()->json(['status'=>200,'message'=>'ur account has been updated successfully']);
             }
