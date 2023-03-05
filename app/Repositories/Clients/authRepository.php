@@ -4,12 +4,11 @@ namespace App\Repositories\Clients;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Throwable;
 
 
-class clientsRepository
+class authRepository
 {
     public function Login($request)
     {
@@ -50,7 +49,7 @@ class clientsRepository
 
         try{
             $user = User::updateOrCreate(['id'=>$request->id],$request->all());
-            
+
             if(!$user->access_code){
                 $user->access_code = setNewRandomCode();
                 $user->save();

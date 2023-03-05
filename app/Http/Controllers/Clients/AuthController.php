@@ -3,25 +3,25 @@
 namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\Clients\clientService;
+use App\Http\Services\Clients\authService;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    protected $clientService;
+    protected $authService;
 
-    public function __construct(clientService $clientService)
+    public function __construct(authService $authService)
     {
-        return $this->clientService = $clientService;
+        return $this->authService = $authService;
     }
 
     public function Login()
     {
-        return $this->clientService->Login(request());
+        return $this->authService->Login(request());
     }
 
     public function updateOrCreate()
     {
-        return $this->clientService->updateOrCreate(request());
+        return $this->authService->updateOrCreate(request());
     }
 }

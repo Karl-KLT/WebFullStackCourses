@@ -21,5 +21,12 @@ class DatabaseSeeder extends Seeder
             'age' => 20,
             'password' => Hash::make('12345')
         ]);
+
+        \App\Models\Blog::create([
+            'text' => 'test for version'
+        ]);
+
+
+        \App\Models\Blog::find(1)->comments()->create(['text'=>'test comment']);
     }
 }
