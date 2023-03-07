@@ -11,11 +11,12 @@ use Throwable;
 
 class authRepository
 {
+
     public function Login($request)
     {
         try{
-            if(Auth::attempt($request->only('name','password'))){
-                return response()->json(['data'=>Auth::user(),'status'=>200,'message'=>'successfully'],200);
+            if($token = Auth::guard('api')->attempt($request->only('name','password'))){
+                return response()->json(['token'=>$this->respondWithToken($token),'status'=>200,'message'=>'successfully'],200);
             }
             return response()->json(['status'=>203,'message'=>'smth went wrong, please check ur name and ur password to login into ur account'],203);
         }catch(Throwable $e){
@@ -71,4 +72,11 @@ class authRepository
         }
     }
 
+    protected function respondWithToken($token)
+    {
+        return [
+            'access_token' => 'bearer '.$token,
+            'expires_in' => auth('api')->factory()->getTTL() * 60
+        ];
+    }
 }

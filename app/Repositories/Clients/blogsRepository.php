@@ -3,7 +3,9 @@
 namespace App\Repositories\Clients;
 
 use App\Models\Blog;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use Throwable;
 
 class blogsRepository
 {
@@ -23,7 +25,13 @@ class blogsRepository
             return $validation->getMessageBag();
         }
 
-        Blog::updateOrCreate(['id'=>$request->id],$request->all());
+        try{
+
+            return response()->json(['data'=>User::find(auth('api')->user()->id)->blogs()->updateOrCreate(['id'=>$request->id],$request->all()),'status'=>200,'message'=>'blog has created successfully']);
+        }catch(Throwable $e){
+            return response()->json(['status'=>200,'message'=>'u need to use token']);
+
+        }
     }
 
     public function destroy($request) // for new version in secound update

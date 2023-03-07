@@ -8,6 +8,8 @@ Route::group(['namespace'=>'Clients','prefix'=>'/'],function () {
 
     Route::post('Login','AuthController@Login');
 
+    Route::post('profile','AuthController@profile');
+
     Route::post('updateOrCreate','AuthController@updateOrCreate');
 
     Route::group(['namespace'=>'Blogs','prefix'=>'Blogs'],function () {
@@ -20,7 +22,7 @@ Route::group(['namespace'=>'Clients','prefix'=>'/'],function () {
 
 
             Route::get('/','CommentsController@index');
-            
+
             Route::post('create','CommentsController@create');
 
 

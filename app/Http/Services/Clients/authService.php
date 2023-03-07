@@ -12,6 +12,7 @@ class authService
     public function __construct(authRepository $authRepository)
     {
         $this->authRepository = $authRepository;
+
     }
 
 
