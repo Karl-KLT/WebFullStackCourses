@@ -3,7 +3,9 @@
 namespace App\Repositories\Clients;
 
 use App\Models\Blog;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use Throwable;
 
 class commentsRepository
 {
@@ -27,16 +29,17 @@ class commentsRepository
     {
 
         $Validator = Validator::make($request->all(),[
-            'Blog_id' => 'required',
+            'blog_id' => 'required',
             'text' => 'required'
         ]);
 
         if($Validator->fails()){
-            return response()->json(['data'=>Blog::find($request->Blog_id)->comments,'status'=>500,'message'=>'failed']);
+            return response()->json(['status'=>500,'message'=>'failed']);
 
         }
 
-        return Blog::find($request->Blog_id)->comments()->create(['text'=>$request->text]);
+
+        return User::find(auth('api')->user()->id)->comments()->create(['text'=>$request->text,'blog_id'=>$request->blog_id]);
     }
 
 }

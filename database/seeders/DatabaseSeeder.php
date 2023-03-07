@@ -22,9 +22,11 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('12345')
         ]);
 
-        // \App\Models\Blog::create([
-        //     'text' => 'test for version'
-        // ]);
+        \App\Models\Blog::create([
+            'title' => 'test title',
+            'text' => 'test for version',
+            'user_id' => 1
+        ]);
 
 
         // \App\Models\Blog::find(1)->comments()->create(['text'=>'test comment']);

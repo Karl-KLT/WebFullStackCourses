@@ -14,7 +14,7 @@ class BlogsController extends Controller
     public function __construct(blogsService $blogsService)
     {
         $this->blogsService = $blogsService;
-        // $this->middleware('auth:api', ['except' => ['updateOrCreate']]);
+        $this->middleware('auth:api');
     }
 
     public function index()

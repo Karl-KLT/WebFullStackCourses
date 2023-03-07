@@ -14,6 +14,8 @@ class CommentsController extends Controller
     public function __construct(commentsService $commentsService)
     {
         $this->commentsService = $commentsService;
+        $this->middleware('auth:api');
+
     }
 
     public function index()

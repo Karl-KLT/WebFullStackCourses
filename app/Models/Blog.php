@@ -11,6 +11,7 @@ class Blog extends Model implements JWTSubject
     use HasFactory;
 
     protected $fillable = [
+        'title',
         'text'
     ];
 

@@ -18,6 +18,7 @@ class blogsRepository
     public function updateOrCreate($request)
     {
         $validation = Validator::make($request->all(),[
+            'title' => 'required',
             'text' => 'required'
         ]);
 
@@ -27,7 +28,7 @@ class blogsRepository
 
         try{
 
-            return response()->json(['data'=>User::find(auth('api')->user()->id)->blogs()->updateOrCreate(['id'=>$request->id],$request->all()),'status'=>200,'message'=>'blog has created successfully']);
+            return response()->json(['data'=>User::find(auth('api')->user()->id)->blogs()->updateOrCreate(['id'=>$request->id],$request->all()),'status'=>200,'message'=>'blog has been created successfully']);
         }catch(Throwable $e){
             return response()->json(['status'=>200,'message'=>'u need to use token']);
 
