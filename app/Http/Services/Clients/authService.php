@@ -16,13 +16,13 @@ class authService
     }
 
 
-    public function Login($request)
+    public function Login()
     {
-        return $this->authRepository->Login($request);
+        return $this->authRepository->Login();
     }
 
-    public function updateOrCreate($request)
+    public function updateOrCreate()
     {
-        return $this->authRepository->updateOrCreate($request);
+        return $this->authRepository->updateOrCreate();
     }
 }

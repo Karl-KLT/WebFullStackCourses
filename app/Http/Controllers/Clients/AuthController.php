@@ -18,7 +18,7 @@ class AuthController extends Controller
 
     public function Login()
     {
-        return $this->authService->Login(request());
+        return $this->authService->Login();
     }
 
     public function profile()
@@ -28,6 +28,6 @@ class AuthController extends Controller
 
     public function updateOrCreate()
     {
-        return $this->authService->updateOrCreate(request());
+        return $this->authService->updateOrCreate();
     }
 }

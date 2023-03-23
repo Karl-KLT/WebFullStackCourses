@@ -30,10 +30,10 @@ class Blog extends Model implements JWTSubject
         return $this->belongsTo(User::class);
     }
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
+    // public function comments()
+    // {
+    //     return $this->hasMany(Comment::class);
+    // }
 
     public function getJWTIdentifier()
     {

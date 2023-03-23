@@ -24,6 +24,6 @@ class BlogsController extends Controller
 
     public function updateOrCreate()
     {
-        return $this->blogsService->updateOrCreate(request());
+        return $this->blogsService->updateOrCreate();
     }
 }

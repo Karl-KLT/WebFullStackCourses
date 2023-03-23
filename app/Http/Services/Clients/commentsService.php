@@ -13,14 +13,14 @@ class commentsService
         $this->commentsRepository = $commentsRepository;
     }
 
-    public function list($request)
+    public function list()
     {
-        return $this->commentsRepository->list($request);
+        return $this->commentsRepository->list();
     }
 
-    public function create($request)
+    public function create()
     {
-        return $this->commentsRepository->create($request);
+        return $this->commentsRepository->create();
     }
 
 

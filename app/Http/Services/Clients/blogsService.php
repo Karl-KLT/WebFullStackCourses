@@ -18,9 +18,9 @@ class blogsService
         return $this->blogsRepository->list();
     }
 
-    public function updateOrCreate($request)
+    public function updateOrCreate()
     {
-        return $this->blogsRepository->updateOrCreate($request);
+        return $this->blogsRepository->updateOrCreate();
     }
 
 

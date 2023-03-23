@@ -20,11 +20,11 @@ class CommentsController extends Controller
 
     public function index()
     {
-        return $this->commentsService->list(request());
+        return $this->commentsService->list();
     }
 
     public function create()
     {
-        return $this->commentsService->create(request());
+        return $this->commentsService->create();
     }
 }

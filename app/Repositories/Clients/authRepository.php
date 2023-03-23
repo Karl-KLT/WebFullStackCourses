@@ -12,10 +12,10 @@ use Throwable;
 class authRepository
 {
 
-    public function Login($request)
+    public function Login()
     {
         try{
-            if($token = Auth::guard('api')->attempt($request->only('name','password'))){
+            if($token = Auth::guard('api')->attempt(request()->only('name','password'))){
                 return response()->json(['token'=>$this->respondWithToken($token),'status'=>200,'message'=>'successfully'],200);
             }
             return response()->json(['status'=>203,'message'=>'smth went wrong, please check ur name and ur password to login into ur account'],203);
@@ -24,12 +24,12 @@ class authRepository
         }
     }
 
-    public function LoginWithUserCode($request)
+    public function LoginWithUserCode()
     {
-        if(User::where('access_code',$request->access_code)->exists()){
-            if(User::where('access_code',$request->access_code)->first()->first_time_login){
-                User::where('access_code',$request->access_code)->update(['first_time_login'=>false]);
-                return response()->json(['data'=>User::where('access_code',$request->access_code)->first(),'status'=>200,'message'=>'successfully'],200);
+        if(User::where('access_code',request()->access_code)->exists()){
+            if(User::where('access_code',request()->access_code)->first()->first_time_login){
+                User::where('access_code',request()->access_code)->update(['first_time_login'=>false]);
+                return response()->json(['data'=>User::where('access_code',request()->access_code)->first(),'status'=>200,'message'=>'successfully'],200);
             }
             return response()->json(['status'=>203,'message'=>"u can't login twice by ur code"],203);
         }
@@ -37,28 +37,28 @@ class authRepository
         return response()->json(['status'=>203,'message'=>'smth went wrong'],203);
     }
 
-    public function updateOrCreate($request)
+    public function updateOrCreate()
     {
         $validation = Validator::make($request->all(),[
-            'name'=>'required|unique:users,name,'.$request->id,
+            'name'=>'required|unique:users,name,'.request()->id,
             'gender'=>'required|in:male,female',
             'age'=>'required|numeric',
             'type'=>'boolean'
         ]);
 
         if($validation->fails()){
-            return response()->json(['required'=>$validation->getMessageBag(),'status'=>203,'message'=>'validation has required']);
+            return response()->json(['error'=>$validation->getMessageBag(),'status'=>203,'message'=>'validation has required']);
         }
 
         try{
-            $user = User::updateOrCreate(['id'=>$request->id],$request->all());
+            $user = User::updateOrCreate(['id'=>request()->id],request()->all());
 
             if(!$user->access_code){
                 $user->access_code = setNewRandomCode();
             }
 
             if($user->password){
-                $user->password = Hash::make($request->password);
+                $user->password = Hash::make(request()->password);
             }
 
             $user->save();
@@ -75,7 +75,8 @@ class authRepository
     protected function respondWithToken($token)
     {
         return [
-            'access_token' => 'bearer '.$token,
+            'access_token' => $token,
+            'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60
         ];
     }
