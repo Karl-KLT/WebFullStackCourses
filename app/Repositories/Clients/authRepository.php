@@ -16,7 +16,7 @@ class authRepository
     {
         try{
             if($token = Auth::guard('api')->attempt(request()->only('name','password'))){
-                return response()->json(['token'=>$this->respondWithToken($token),'status'=>200,'message'=>'successfully'],200);
+                return response()->json(['data'=>$this->respondWithToken($token),'status'=>200,'message'=>'successfully'],200);
             }
             return response()->json(['status'=>203,'message'=>'smth went wrong, please check ur name and ur password to login into ur account'],203);
         }catch(Throwable $e){
@@ -77,6 +77,7 @@ class authRepository
         return [
             'access_token' => $token,
             'token_type' => 'bearer',
+            'token' => 'bearer '.$token,
             'expires_in' => auth('api')->factory()->getTTL() * 60
         ];
     }
