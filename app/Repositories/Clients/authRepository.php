@@ -20,7 +20,7 @@ class authRepository
             }
             return response()->json(['status'=>203,'message'=>'smth went wrong, please check ur name and ur password to login into ur account'],203);
         }catch(Throwable $e){
-            return $this->LoginWithUserCode($request);
+            return $this->LoginWithUserCode();
         }
     }
 
@@ -39,7 +39,7 @@ class authRepository
 
     public function updateOrCreate()
     {
-        $validation = Validator::make($request->all(),[
+        $validation = Validator::make(request()->all(),[
             'name'=>'required|unique:users,name,'.request()->id,
             'gender'=>'required|in:male,female',
             'age'=>'required|numeric',
@@ -63,7 +63,7 @@ class authRepository
 
             $user->save();
 
-            if($request->id){
+            if(request()->id){
                 return response()->json(['status'=>200,'message'=>'ur account has been updated successfully']);
             }
             return response()->json(['yourAccessCode'=>$user->access_code,'status'=>200,'message'=>'ur account has been created successfully']);
