@@ -15,9 +15,9 @@ class blogsRepository
         return Blog::paginate(20);
     }
 
-    public function updateOrCreate($request)
+    public function updateOrCreate()
     {
-        $validation = Validator::make($request->all(),[
+        $validation = Validator::make(request()->all(),[
             'title' => 'required',
             'text' => 'required'
         ]);
@@ -27,16 +27,15 @@ class blogsRepository
         }
 
         try{
-
-            return response()->json(['data'=>User::find(auth('api')->user()->id)->blogs()->updateOrCreate(['id'=>$request->id],$request->all()),'status'=>200,'message'=>'blog has been created successfully']);
+            return response()->json(['data'=>User::find(auth('api')->user()->id)->blogs()->updateOrCreate(['id'=>request()->id],request()->all()),'status'=>200,'message'=>'blog has been created successfully']);
         }catch(Throwable $e){
             return response()->json(['status'=>200,'message'=>'u need to use token']);
 
         }
     }
 
-    public function destroy($request) // for new version in secound update
+    public function destroy() // for new version in secound update
     {
-        return Blog::find($request->id)->delete();
+        return Blog::find(request()->id)->delete();
     }
 }

@@ -10,10 +10,10 @@ use Throwable;
 class commentsRepository
 {
 
-    public function list($request)
+    public function list()
     {
 
-        $Validator = Validator::make($request->all(),[
+        $Validator = Validator::make(request()->all(),[
             'Blog_id' => 'required'
         ]);
 
@@ -22,13 +22,13 @@ class commentsRepository
 
         }
 
-        return response()->json(['data'=>Blog::find($request->Blog_id)->comments,'status'=>200,'message'=>'successfully']);
+        return response()->json(['data'=>Blog::find(request()->Blog_id)->comments,'status'=>200,'message'=>'successfully']);
     }
 
-    public function create($request)
+    public function create()
     {
 
-        $Validator = Validator::make($request->all(),[
+        $Validator = Validator::make(request()->all(),[
             'blog_id' => 'required',
             'text' => 'required'
         ]);
@@ -39,7 +39,7 @@ class commentsRepository
         }
 
 
-        return User::find(auth('api')->user()->id)->comments()->create(['text'=>$request->text,'blog_id'=>$request->blog_id]);
+        return User::find(auth('api')->user()->id)->comments()->create(['text'=>request()->text,'blog_id'=>request()->blog_id]);
     }
 
 }
