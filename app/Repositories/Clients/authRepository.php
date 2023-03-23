@@ -46,6 +46,7 @@ class authRepository
             'type'=>'boolean'
         ]);
 
+
         if($validation->fails()){
             return response()->json(['error'=>$validation->getMessageBag(),'status'=>203,'message'=>'validation has required']);
         }

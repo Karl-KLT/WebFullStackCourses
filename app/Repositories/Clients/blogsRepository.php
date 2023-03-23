@@ -23,7 +23,7 @@ class blogsRepository
         ]);
 
         if($validation->fails()){
-            return $validation->getMessageBag();
+            return response()->json(['error'=>$validation->getMessageBag()]);
         }
 
         try{

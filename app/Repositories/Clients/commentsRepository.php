@@ -12,7 +12,6 @@ class commentsRepository
 
     public function list()
     {
-
         $Validator = Validator::make(request()->all(),[
             'Blog_id' => 'required'
         ]);
@@ -22,7 +21,7 @@ class commentsRepository
 
         }
 
-        return response()->json(['data'=>Blog::find(request()->Blog_id)->comments,'status'=>200,'message'=>'successfully']);
+        return response()->json(['data'=>Blog::find(request()->query('Blog_id'))->comments,'status'=>200,'message'=>'successfully']);
     }
 
     public function create()
@@ -34,7 +33,7 @@ class commentsRepository
         ]);
 
         if($Validator->fails()){
-            return response()->json(['status'=>500,'message'=>'failed']);
+            return response()->json(['status'=>500,'message'=>'failed','error'=>$Validator->getMessageBag()]);
 
         }
 
