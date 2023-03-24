@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Tag;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -27,6 +29,8 @@ class DatabaseSeeder extends Seeder
             'text' => 'test for version',
             'user_id' => 1
         ]);
+
+        Tag::create(['blog_id'=>1,'name'=>'testBlog']);
 
 
         // \App\Models\Blog::find(1)->comments()->create(['text'=>'test comment']);

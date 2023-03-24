@@ -28,6 +28,15 @@ Route::group(['namespace'=>'Clients','prefix'=>'/'],function () {
 
         });
 
+        Route::group(['namespace'=>'Tags','prefix'=>'Tags'],function(){
+
+            Route::get('getList','TagsController@getList');
+
+            Route::post('updateOrCreate','TagsController@updateOrCreate');
+
+
+        });
+
     });
 
 });
