@@ -23,6 +23,7 @@ class Blog extends Model implements JWTSubject
         return collect(parent::toArray())->merge([
             'user' => $this->user,
             'tags' => $this->tags,
+            'comments' => $this->comments
         ]);
     }
 

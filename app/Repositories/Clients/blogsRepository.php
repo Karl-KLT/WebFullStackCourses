@@ -12,7 +12,7 @@ class blogsRepository
 
     public function list()
     {
-        return Blog::paginate(20);
+        return Blog::all();
     }
 
     public function updateOrCreate()

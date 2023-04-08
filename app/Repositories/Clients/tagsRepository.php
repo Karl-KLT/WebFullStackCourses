@@ -27,7 +27,7 @@ class tagsRepository
         // body blog_id,name,id (if update)
         $validation = Validator::make(request()->all(),[
             'blog_id' => 'required',
-            'name' => 'required'
+            'name' => 'required|unique:tags,name,blog_id,'.request()->blog_id
         ]);
 
         if($validation->fails()){
